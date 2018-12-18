@@ -6,13 +6,27 @@ from dotenv import load_dotenv
 
 dotenv_path = join(dirname(__file__), '.env')
 BOT_KEY = environ.get("BOT_KEY")
+SECRET_PATH = environ.get("SECRET_PATH")
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
     print(request.headers)
-    return(":D")
+    return(request.headers)
+
+
+@app.route('/bot')
+def print_bot():
+    print("botttt " + request.headers)
+    return("botttt " + request.headers)
+
+@app.route('/' + SECRET_PATH)
+def print_secret():
+    print("segret " + request.headers)
+    return("segret " + request.headers)
+
 
 """ def get_url(method):
     return "https://api.telegram.org/bot{}/{}".format(BOT_KEY, method)
