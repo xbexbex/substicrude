@@ -1,31 +1,40 @@
 import requests
+import asyncio
+import os
 from flask import Flask, request
-from os import environ
-from os.path import join, dirname
 from dotenv import load_dotenv
+from telethon import TelegramClient
 
-dotenv_path = join(dirname(__file__), '.env')
-BOT_KEY = environ.get("BOT_KEY")
-SECRET_PATH = environ.get("SECRET_PATH")
+load_dotenv(override=True)
+BOT_KEY = os.getenv("BOT_KEY")
+SECRET_PATH = os.getenv("SECRET_PATH")
 
 app = Flask(__name__)
-
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
 
 @app.route('/')
 def index():
     print(request.headers)
-    return(request.headers)
+    return(str(request.headers))
 
 
 @app.route('/bot')
 def print_bot():
-    print("botttt " + request.headers)
-    return("botttt " + request.headers)
+    print(str(SECRET_PATH))
+    return(str(SECRET_PATH))
 
-@app.route('/' + SECRET_PATH)
+@app.route('/' + str(BOT_KEY), methods=['POST'])
 def print_secret():
-    print("segret " + request.headers)
-    return("segret " + request.headers)
+    print("segret " + str(request.data))
+    return("segret " + str(request.headers))
+
+if __name__ == "__main__":
+    app.run(
+        ssl_context=('scrub.pem', 'scrub.key'),
+        host='0.0.0.0',
+        port='8443'
+    )
 
 
 """ def get_url(method):

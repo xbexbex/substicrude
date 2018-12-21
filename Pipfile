@@ -11,6 +11,8 @@ autopep8 = "*"
 flask = "*"
 requests = "*"
 python-dotenv = "*"
+telethon = "*"
+pyopenssl = "*"
 
 [requires]
 python_version = "3.7"
