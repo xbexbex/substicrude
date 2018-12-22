@@ -8,11 +8,11 @@ pylint = "*"
 autopep8 = "*"
 
 [packages]
-flask = "*"
 requests = "*"
 python-dotenv = "*"
 telethon = "*"
 pyopenssl = "*"
+quart = "*"
 
 [requires]
 python_version = "3.7"
